@@ -1,18 +1,21 @@
 export default class Game {
-    constructor(field, character) {
+    constructor(field, goblin) {
         this.field = field;
         this.fieldSize = 4;
         this.goblin = goblin;
         this.activeGoblin = null;
+        this.position = null; 
     }
-
-  
 
     newField() {
         const field = this.field.getField(this.fieldSize);
         const body = document.querySelector('body');
-        const container = document.createElement('div');
+        let container = document.querySelector('.container'); 
+        if (container) {
+            body.removeChild(container); 
+        }
 
+        container = document.createElement('div');
         container.classList.add('container');
         container.appendChild(field);
         body.insertBefore(container, body.firstChild);
@@ -20,7 +23,7 @@ export default class Game {
     }
 
     randomPosition() {
-        const position = Math.floor(Math.random() * this.fieldSize ** 2);
+        const position = Math.floor(Math.random()  *  this.fieldSize  **  2);
         if (position === this.position) {
             this.randomPosition();
             return;
@@ -35,6 +38,7 @@ export default class Game {
             return;
         }
         this.cells[this.position].firstChild.remove();
+        this.activeGoblin = null; 
     }
 
     adventGoblin() {
@@ -43,12 +47,22 @@ export default class Game {
     }
 
     play() {
-        setInterval(() => {
-            this.generatePosition();
-        }, 800);
+        let intervalId;
+
+        function gameLoop() {
+            this.randomPosition();
+        }
+
+        intervalId = setInterval(gameLoop.bind(this), 800);
+
+        this.start = () => {
+            this.newField();
+            clearInterval(intervalId); // Останавливаем интервал при старте игры
+            intervalId = setInterval(gameLoop.bind(this), 800);
+        };
     }
 
-      start() {
+    start() {
         this.newField();
         this.play();
     }

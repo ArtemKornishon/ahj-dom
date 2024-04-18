@@ -11,7 +11,7 @@ export default class Goblin {
     }
 
     getGoblin() {
-        this.createGoblin
+        this.createGoblin()
         return this.goblin
     }
 }

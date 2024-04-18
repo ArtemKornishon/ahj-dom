@@ -26,8 +26,10 @@ module.exports = {
         ],
       },
       {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader, 'css-loader',
+        ],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -41,8 +43,8 @@ module.exports = {
       filename: './index.html',
     }),
     new MiniCssExtractPlugin({
-      filename: './src/css/style.css',
-      chunkFilename: './style.css',
+      filename: '[name].css',
+      chunkFilename: '[id].css',
     }),
   ],
 };
