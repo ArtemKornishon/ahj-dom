@@ -9,9 +9,9 @@ class Field {
   }
   drawField() {
     const field = document.createElement('div');
-    const cell = document.createElement('div');
     field.classList.add('field');
     for (let i = 0; i < this.fieldSize ** 2; i++) {
+      const cell = document.createElement('div');
       cell.classList.add('cell');
       field.appendChild(cell);
     }
