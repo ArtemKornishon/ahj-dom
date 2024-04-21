@@ -10,7 +10,7 @@ class Field {
   drawField() {
     const field = document.createElement('div');
     field.classList.add('field');
-    for (let i = 0; i < this.fieldSize ** 2; i++) {
+    for (let i = 0; i < this.fieldSize * 4; i++) {
       const cell = document.createElement('div');
       cell.classList.add('cell');
       field.appendChild(cell);
@@ -61,7 +61,7 @@ class Game {
     this.cells = [...field.children];
   }
   randomPosition() {
-    const position = Math.floor(Math.random() * this.fieldSize ** 2);
+    const position = Math.floor(Math.random() * this.fieldSize * 4);
     if (position === this.position) {
       this.randomPosition();
       return;
@@ -89,7 +89,7 @@ class Game {
     intervalId = setInterval(gameLoop.bind(this), 800);
     this.start = () => {
       this.newField();
-      clearInterval(intervalId); // Останавливаем интервал при старте игры
+      clearInterval(intervalId);
       intervalId = setInterval(gameLoop.bind(this), 800);
     };
   }

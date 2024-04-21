@@ -23,7 +23,7 @@ export default class Game {
     }
 
     randomPosition() {
-        const position = Math.floor(Math.random()  *  this.fieldSize  **  2);
+        const position = Math.floor(Math.random()  *  this.fieldSize  *  4);
         if (position === this.position) {
             this.randomPosition();
             return;
@@ -57,7 +57,7 @@ export default class Game {
 
         this.start = () => {
             this.newField();
-            clearInterval(intervalId); // Останавливаем интервал при старте игры
+            clearInterval(intervalId); 
             intervalId = setInterval(gameLoop.bind(this), 800);
         };
     }
